@@ -1,0 +1,156 @@
+html,
+body {
+	min-height: 100%;
+}
+body {
+	margin: 0;
+	font-family: sans-serif;
+	background: #ffffff;
+	overflow: hidden;
+}
+.slides {
+	display: flex;
+	flex-wrap: wrap;
+}
+.wrapper {
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0;
+}
+.canvas {
+	height: 100vh;
+	width: 100vw;
+	z-index: 10;
+	grid-area: 1 / 1 / 1 / 1;
+}
+.multi-textures {
+	grid-area: 1 / 1 / 1 / 1;
+	z-index: 15;
+	align-content: center;
+	img {
+		display: none;
+		min-width: 100%;
+		min-height: 100%;
+		object-fit: cover;
+	}
+}
+.no-curtains {
+	.multi-textures {
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&.image-1 .multi-textures img:nth-child(2) {
+		display: block;
+	}
+	&.image-2 .multi-textures img:nth-child(3) {
+		display: block;
+	}
+	&.image-3 .multi-textures img:nth-child(4) {
+		display: block;
+	}
+	&.image-4 .multi-textures img:nth-child(5) {
+		display: block;
+	}
+	&.image-5 .multi-textures img:nth-child(6) {
+		display: block;
+	}
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+	width: 100%;
+}
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 4em;
+  height: 4em;
+	margin: 0.5em .2em;
+	cursor: pointer;
+	transition: all .7s ease-in 0s;
+	svg,
+	svg path {
+		pointer-events: none;
+	}
+}
+
+
+/* Not necessary. Use to show example textures animations */
+.open-modal {
+  position: fixed;
+  top: 4px;
+  right: 18px;
+	background-color: rgba(0, 0, 0, .9);
+  z-index: 18;
+  button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		cursor: pointer;
+  }
+  .js-close-modal {
+    display: none;
+  }
+}
+
+.modal {
+  position: fixed;
+  right: 0;
+  width: 300px;
+  top: 0;
+  bottom: 0;
+	z-index: 17;
+	overflow-y: auto;
+	transform: translateX(300px);
+	transition: transform .3s ease-in-out;
+  img {
+		max-width: 100%;
+		z-index: 19;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, .85);
+    padding: 2.5em 1.5em;
+    img {
+			border: 2px dashed #fff;
+      width: 235px;
+      height: 155px;
+			&:not(:last-of-type) {
+				margin-bottom: 2em;
+			}
+      &.active {
+        border-style: solid;
+      }
+    }
+  }
+}
+.modal-active {
+	.open-modal {
+		.js-close-modal {
+      display: flex;
+    }
+    .js-open-modal {
+			display: none;
+    }
+  }
+  .modal {
+		transform: translateX(0px);
+		transition: transform .3s ease-in-out;
+  }
+}
